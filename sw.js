@@ -1,6 +1,6 @@
 // Bump this version whenever the offline app shell changes.
 const BASE = new URL('./', self.location.href);
-const CACHE = 'torupass-' + BASE.pathname + '-v2';
+const CACHE = 'torupass-' + BASE.pathname + '-v3';
 const ASSETS = ['./', './style.css', './app.js', './game.js', './pwa.js',
   './manifest.webmanifest', './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'].map(path => new URL(path, BASE).href);
 self.addEventListener('install', event => {
