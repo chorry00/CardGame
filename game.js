@@ -1,10 +1,10 @@
 export const personalities = [
- {name:'つなぎ屋',description:'連番を最優先。つながらないカードには慎重。',limit:1,reserve:2,bridge:5},
- {name:'貯金家',description:'チップを温存。場のチップが多いカードも好む。',limit:5,reserve:6,potWeight:1.5},
- {name:'慎重派',description:'高い数字を避け、得点の増加を小さく抑える。',limit:0,reserve:2},
- {name:'大胆派',description:'多少の失点は気にせず、早めにカードを取る。',limit:10,reserve:3},
- {name:'収集家',description:'連番の足がかりを集め、1つ違いの隙間も狙う。',limit:4,reserve:3,bridge:9},
- {name:'戦略家',description:'残りの山札に合わせて、チップの使い方を変える。',limit:2,reserve:4,endgame:true}
+ {playerName:'Oliver',name:'つなぎ屋',description:'連番を最優先。つながらないカードには慎重。',limit:1,reserve:2,bridge:5},
+ {playerName:'Emma',name:'貯金家',description:'チップを温存。場のチップが多いカードも好む。',limit:5,reserve:6,potWeight:1.5},
+ {playerName:'Noah',name:'慎重派',description:'高い数字を避け、得点の増加を小さく抑える。',limit:0,reserve:2},
+ {playerName:'Sophia',name:'大胆派',description:'多少の失点は気にせず、早めにカードを取る。',limit:10,reserve:3},
+ {playerName:'Leo',name:'収集家',description:'連番の足がかりを集め、1つ違いの隙間も狙う。',limit:4,reserve:3,bridge:9},
+ {playerName:'Ava',name:'戦略家',description:'残りの山札に合わせて、チップの使い方を変える。',limit:2,reserve:4,endgame:true}
 ];
 export function cardScore(cards) {
   const sorted = [...cards].sort((a,b)=>a-b);
@@ -15,7 +15,7 @@ export function createGame(count, random=Math.random) {
   if (!Number.isInteger(count)||count<3||count>7) throw new Error('人数は3〜7人です');
   const deck=Array.from({length:33},(_,i)=>i+3);
   for(let i=deck.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
-  const players=Array.from({length:count},(_,i)=>({name:i===0?'あなた':`CPU ${i}・${personalities[i-1].name}`,personality:i===0?null:i-1,chips:count<=5?11:count===6?9:7,cards:[]}));
+  const players=Array.from({length:count},(_,i)=>({name:i===0?'あなた':personalities[i-1].playerName,personality:i===0?null:i-1,chips:count<=5?11:count===6?9:7,cards:[]}));
   return {players,deck:deck.slice(0,24),current:Math.floor(random()*count),card:null,pot:0,ended:false,turns:0};
 }
 export function reveal(game){if(game.card===null&&!game.ended) game.card=game.deck.pop();}
