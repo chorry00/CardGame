@@ -80,3 +80,14 @@ body[data-screen="game"] .activity,body[data-screen="game"] #quit{font-size:12px
 @media(max-width:520px){body[data-screen="home"] .art{height:154px}body[data-screen="home"] .art .card{height:132px;width:96px;font-size:42px}body[data-screen="home"] .wide{margin-top:10px}}
 @media(max-height:650px){body[data-screen="home"] #main{padding:12px 0;gap:12px}body[data-screen="home"] .art{height:124px}body[data-screen="home"] .art .card{height:108px;width:80px;font-size:34px}body[data-screen="game"] #main{gap:4px;padding:4px 0}}
 @media(max-height:650px){body[data-screen="home"] .pwa-status{margin-bottom:8px}}
+/* Let the face-up card grow with the available table height. */
+body[data-screen="game"] .table{container-type:size;min-height:148px}
+body[data-screen="game"] #main{grid-template-rows:auto auto minmax(148px,1fr) auto auto auto}
+body[data-screen="game"] .field{flex-direction:column;gap:6px}
+body[data-screen="game"] .field .card{height:clamp(86px,calc(100cqh - 52px),180px);width:auto;aspect-ratio:2/3;font-size:clamp(30px,calc((100cqh - 52px)*.34),62px);border-width:5px}
+body[data-screen="game"] .pot{margin:0;min-height:20px;line-height:20px}
+body[data-screen="game"] .status{margin-top:6px;line-height:20px;min-height:20px}
+body[data-screen="game"] .play-area{gap:36px}
+body[data-screen="game"] .hand .current-score{display:flex;align-items:baseline;gap:8px;font-size:13px;color:#294b39}
+body[data-screen="game"] .current-score strong{font-size:24px;line-height:30px;letter-spacing:-.5px}
+@media(max-height:650px){body[data-screen="game"] .opponent{min-height:24px;padding-top:0;padding-bottom:0}body[data-screen="game"] #main{gap:3px}body[data-screen="game"] .hand-cards{height:34px;min-height:34px;margin:4px 0}body[data-screen="game"] .game-top{min-height:20px}body[data-screen="game"] .game-bottom{min-height:24px}body[data-screen="game"] #quit{min-height:24px}body[data-screen="game"] .current-score strong{font-size:22px;line-height:26px}}
