@@ -30,16 +30,27 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
     if (updating) location.reload();
   });
   navigator.serviceWorker.register(new URL('./sw.js', import.meta.url), {updateViaCache: 'none'}).then(registration => {
+    function applyUpdate() {
+      updating = true;
+      registration.waiting?.postMessage({type: 'ACTIVATE_UPDATE'});
+    }
     function offerUpdate() {
       if (!registration.waiting || !navigator.serviceWorker.controller) return;
+      if (document.body.dataset.screen === 'home') { applyUpdate(); return; }
       update.hidden = false;
       update.onclick = () => {
         if (!confirm('更新して最初の画面に戻ります。進行中のゲームは終了します。よろしいですか？')) return;
-        updating = true;
-        registration.waiting?.postMessage({type: 'ACTIVATE_UPDATE'});
+        applyUpdate();
       };
     }
     offerUpdate();
+    new MutationObserver(offerUpdate).observe(document.body, {attributes: true, attributeFilter: ['data-screen']});
+    const checkUpdate = () => registration.update().catch(() => {});
+    window.addEventListener('online', checkUpdate);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') checkUpdate();
+    });
+    checkUpdate();
     registration.addEventListener('updatefound', () => {
       registration.installing?.addEventListener('statechange', offerUpdate);
     });

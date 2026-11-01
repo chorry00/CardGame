@@ -2,7 +2,7 @@
   "id": "./",
   "name": "げしぇんく — カードゲーム",
   "short_name": "げしぇんく",
-  "description": "数字は少なく、チップは多く。CPUと遊ぶカードゲーム。",
+  "description": "CPUと遊ぶカードゲーム。",
   "lang": "ja",
   "start_url": "./",
   "scope": "./",
