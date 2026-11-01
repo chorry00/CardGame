@@ -16,7 +16,7 @@ test('PWAのアイコンと配信ファイルが存在する',async()=>{
 test('初回保存後はオフラインで画面とゲームを取得でき、更新は明示操作で適用する',async()=>{
  const handlers={},stored=new Map(),deleted=[];let pending,claimed=false,skipped=false;
  const self={location:{href:'https://game.example/CardGame/sw.js'},clients:{claim:async()=>{claimed=true;}},skipWaiting:()=>{skipped=true;},addEventListener:(type,fn)=>{handlers[type]=fn;}};
- const caches={open:async()=>({addAll:async paths=>{for(const path of paths){const file=new URL(path).pathname.replace('/CardGame/','');stored.set(path,await readFile(new URL('../'+(file||'index.html'),import.meta.url),'utf8'));}}}),keys:async()=>['torupass-/CardGame/-v1','torupass-/CardGame/-v3','torupass-/OtherGame/-v1','other-app'],delete:async key=>{deleted.push(key);},match:async req=>stored.get(typeof req==='string'?req:req.url)};
+ const caches={open:async()=>({addAll:async paths=>{for(const path of paths){const file=new URL(path).pathname.replace('/CardGame/','');stored.set(path,await readFile(new URL('../'+(file||'index.html'),import.meta.url),'utf8'));}}}),keys:async()=>['torupass-/CardGame/-v1','torupass-/CardGame/-v4','torupass-/OtherGame/-v1','other-app'],delete:async key=>{deleted.push(key);},match:async req=>stored.get(typeof req==='string'?req:req.url)};
  const context=vm.createContext({self,caches,URL,fetch:()=>{throw new Error('offline');}});
  vm.runInContext(await readFile(new URL('../sw.js',import.meta.url),'utf8'),context);
  handlers.install({waitUntil:p=>pending=p});await pending;

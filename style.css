@@ -45,3 +45,5 @@ body[data-screen="game"] #quit{min-height:28px;padding:3px 6px;font-size:10px}
 @media(max-height:650px){body[data-screen="game"] header{height:46px;flex-basis:46px}body[data-screen="game"] .table{padding:5px 10px}body[data-screen="game"] .field .card{height:82px;width:60px;font-size:26px}body[data-screen="game"] .status{margin-top:5px}body[data-screen="game"] .opponent{min-height:25px}}
 @media(max-height:480px){body[data-screen="game"] .app{height:auto;min-height:100dvh}body[data-screen="game"] #main{min-height:420px}}
 body[data-screen="game"] #main>*,body[data-screen="game"] .hand{min-width:0}
+
+.intro{padding-top:24px;padding-bottom:12px}.intro .art{margin-top:0;margin-bottom:0}.results{margin-top:24px}.results h1{margin:0 0 20px}
