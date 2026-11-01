@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createGame,reveal,act,cpuAction,score,cardScore} from '../game.js';
+test('連番の最小値だけを加算する',()=>{assert.equal(score({cards:[3,4,5,11,12,22],chips:15}),21);assert.equal(cardScore([8,6,7,10]),16);assert.equal(cardScore([]),0);});
+test('人数ごとの準備と山札',()=>{for(let n=3;n<=7;n++){const g=createGame(n);assert.equal(g.players.length,n);assert.equal(g.players[0].chips,n<=5?11:n===6?9:7);assert.equal(g.deck.length,24);assert.equal(new Set(g.deck).size,24);assert.ok(g.deck.every(c=>c>=3&&c<=35));}});
+test('パスと獲得、手番の継続、チップ不足',()=>{const g=createGame(3,()=>0);g.current=0;reveal(g);const c=g.card;assert.ok(act(g,'pass'));assert.equal(g.current,1);assert.equal(g.pot,1);assert.ok(act(g,'take'));assert.equal(g.current,1);assert.equal(g.players[1].chips,12);assert.deepEqual(g.players[1].cards,[c]);g.players[1].chips=0;assert.equal(act(g,'pass'),false);});
+test('3〜7人のゲームが完了し、全カードとチップが保存される',()=>{for(let n=3;n<=7;n++){const g=createGame(n);const chips=g.players.reduce((a,p)=>a+p.chips,0);reveal(g);while(!g.ended&&g.turns<2000)act(g,cpuAction(g));assert.equal(g.ended,true);assert.equal(g.players.reduce((a,p)=>a+p.cards.length,0),24);assert.equal(g.players.reduce((a,p)=>a+p.chips,0),chips);assert.equal(g.pot,0);assert.equal(g.deck.length,0);assert.equal(act(g,'take'),false);}});
+test('CPUごとに性格が異なり、同じ場面でも判断が分かれる',()=>{const g=createGame(7);assert.equal(new Set(g.players.slice(1).map(p=>p.personality)).size,6);g.card=8;g.pot=0;g.current=1;g.players[1].cards=[];g.players[1].chips=10;assert.equal(cpuAction(g),'pass');g.current=4;g.players[4].cards=[];g.players[4].chips=10;assert.equal(cpuAction(g),'take');});
