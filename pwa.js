@@ -29,7 +29,7 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     if (updating) location.reload();
   });
-  navigator.serviceWorker.register('/sw.js', {updateViaCache: 'none'}).then(registration => {
+  navigator.serviceWorker.register(new URL('./sw.js', import.meta.url), {updateViaCache: 'none'}).then(registration => {
     function offerUpdate() {
       if (!registration.waiting || !navigator.serviceWorker.controller) return;
       update.hidden = false;

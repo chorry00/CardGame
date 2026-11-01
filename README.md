@@ -22,3 +22,11 @@ HTTPSで公開したURLをスマホで開いてください（ローカル開発
 - アプリを閉じたり再読み込みした場合、進行中の対戦は保存されません。
 
 本番では `server.js` の公開ポートをHTTPSリバースプロキシで配信するか、HTML/CSS/JS、manifest、sw.js、iconsを同一オリジンのルートへ静的配信してください。
+
+## GitHub Pages公開
+公開URL: https://chorry00.github.io/CardGame/
+
+リポジトリの Settings → Pages → Build and deployment → Source を **GitHub Actions** に設定します。
+`main` へのpush、または Actions → Publish card game → Run workflow でテスト後に静的ファイルを公開します。
+初回push時にPagesが未設定だった場合、設定後にRun workflowを実行してください。
+サブディレクトリ `/CardGame/` とローカルの `/` の両方で動作する相対パスを使用しています。
