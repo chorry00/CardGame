@@ -1,4 +1,4 @@
-import {createGame,reveal,act,cpuAction,score,cardScore,personalities} from './game.js?v=7';
+import {createGame,reveal,act,cpuAction,score,cardScore,personalities} from './game.js?v=8';
 const main=document.querySelector('#main');let count=5,game,timer,log='',busy=false;
 function color(n){return n<=10?'#218eb9':n<=14?'#4a9b43':n<=17?'#91ad35':n<=20?'#c3b32d':n<=23?'#d79432':n<=26?'#d25b35':n<=30?'#be354e':'#70338c';}
 function paintCards(){main.querySelectorAll('[data-n]').forEach(el=>el.style.setProperty('--card-color',color(Number(el.dataset.n))));}

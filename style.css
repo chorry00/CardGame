@@ -91,3 +91,11 @@ body[data-screen="game"] .play-area{gap:36px}
 body[data-screen="game"] .hand .current-score{display:flex;align-items:baseline;gap:8px;font-size:13px;color:#294b39}
 body[data-screen="game"] .current-score strong{font-size:24px;line-height:30px;letter-spacing:-.5px}
 @media(max-height:650px){body[data-screen="game"] .opponent{min-height:24px;padding-top:0;padding-bottom:0}body[data-screen="game"] #main{gap:3px}body[data-screen="game"] .hand-cards{height:34px;min-height:34px;margin:4px 0}body[data-screen="game"] .game-top{min-height:20px}body[data-screen="game"] .game-bottom{min-height:24px}body[data-screen="game"] #quit{min-height:24px}body[data-screen="game"] .current-score strong{font-size:22px;line-height:26px}}
+/* Center the face-up card independently of the deck and separate each label. */
+body[data-screen="game"] .play-area{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px}
+body[data-screen="game"] .play-area>div:first-child{justify-self:center}
+body[data-screen="game"] .field{grid-column:2;gap:12px}
+body[data-screen="game"] .field .card{height:clamp(72px,calc(100cqh - 70px),180px);font-size:clamp(26px,calc((100cqh - 70px)*.34),62px)}
+body[data-screen="game"] .status{margin-top:14px}
+body[data-screen="game"] .pot{display:flex;align-items:center;justify-content:center;height:20px}
+body[data-screen="game"] .play-area,body[data-screen="game"] .status{flex-shrink:0}

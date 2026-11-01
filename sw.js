@@ -1,7 +1,7 @@
 // Bump this version whenever the offline app shell changes.
 const BASE = new URL('./', self.location.href);
-const CACHE = 'torupass-' + BASE.pathname + '-v7';
-const ASSETS = ['./', './style.css?v=7', './app.js?v=7', './game.js?v=7', './pwa.js?v=7',
+const CACHE = 'torupass-' + BASE.pathname + '-v8';
+const ASSETS = ['./', './style.css?v=8', './app.js?v=8', './game.js?v=8', './pwa.js?v=8',
   './manifest.webmanifest', './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'].map(path => new URL(path, BASE).href);
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS.map(url => new Request(url, {cache: 'reload'})))));
